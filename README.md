@@ -1,122 +1,124 @@
 # Order 66 Raid Analysis - SWGoH
 
-Eine Webanwendung zur Analyse der Order 66 Raid-Daten aus Star Wars: Galaxy of Heroes.
+A web application for analyzing Order 66 raid data from Star Wars: Galaxy of Heroes.
+
+🚀 **Live Demo**: [https://dennisbecker.github.io/order66/](https://dennisbecker.github.io/order66/)
 
 ## Features
 
-- 📊 Interaktive Charts zur Visualisierung der Raid-Performance
-- 🏆 Performance Ranking über Zeit
-- 📈 Detaillierte Spielerstatistiken
-- 🔍 Filterbare und sortierbare Tabellen
-- 📥 Datenexport als CSV
-- 🌟 Star Wars-inspiriertes dunkles Design
+- 📊 Interactive charts for visualizing raid performance
+- 🏆 Performance ranking over time
+- 📈 Detailed player statistics
+- 🔍 Filterable and sortable tables
+- 📥 Data export as CSV
+- 🌟 Star Wars-inspired dark design
 
 ## GitHub Pages Setup
 
 ### 1. Repository Setup
-1. Erstelle ein neues GitHub Repository namens `order66` (oder einen anderen Namen deiner Wahl)
-2. Pushe diesen Code in das Repository
+1. Create a new GitHub repository named `order66` (or any name you prefer)
+2. Push this code to the repository
 
-### 2. GitHub Pages Konfiguration
-1. Gehe zu den Repository-Einstellungen auf GitHub
-2. Navigiere zum Abschnitt "Pages" in der linken Seitenleiste
-3. Unter "Source" wähle "GitHub Actions"
-4. Die Workflow-Datei `.github/workflows/deploy.yml` wird automatisch erkannt
+### 2. GitHub Pages Configuration
+1. Go to your repository settings on GitHub
+2. Navigate to the "Pages" section in the left sidebar
+3. Under "Source" select "GitHub Actions"
+4. The workflow file `.github/workflows/deploy.yml` will be automatically detected
 
-### 3. Konfiguration anpassen
-1. Öffne `astro.config.mjs`
-2. Ersetze `YOUR_GITHUB_USERNAME` mit deinem GitHub-Benutzernamen
-3. Wenn dein Repository einen anderen Namen als `order66` hat, passe auch den `base` Pfad entsprechend an
+### 3. Configuration Adjustment
+1. Open `astro.config.mjs`
+2. Replace `YOUR_GITHUB_USERNAME` with your GitHub username
+3. If your repository has a different name than `order66`, adjust the `base` path accordingly
 
-**Hinweis zur lokalen Development:**
-- Für lokale Entwicklung wird automatisch `base: '/'` verwendet (keine `/order66` in der URL)
-- Für Production/GitHub Pages wird `base: '/order66'` verwendet
-- Die Konfiguration passt sich automatisch an die Umgebung an
+**Note for local development:**
+- For local development, `base: '/'` is automatically used (no `/order66` in the URL)
+- For production/GitHub Pages, `base: '/order66'` is used
+- The configuration automatically adapts to the environment
 
-### 4. CSV-Dateien hinzufügen
-**Automatischer Workflow mit Astro Collections:**
+### 4. Adding CSV Files
+**Automatic workflow with Astro Collections:**
 
-1. **Neue CSV-Dateien hinzufügen**: Kopiere neue CSV-Dateien in das `data/` Verzeichnis im Root des Projekts
-2. **Automatische Konvertierung**: Beim Build-Prozess (`npm run build`) werden CSV-Dateien automatisch zu Astro Collections konvertiert
-3. **Deployment**: Committe und pushe die Änderungen - GitHub Actions führt automatisch den Build mit Konvertierung durch
+1. **Add new CSV files**: Copy new CSV files to the `data/` directory in the project root
+2. **Automatic conversion**: During the build process (`npm run build`), CSV files are automatically converted to Astro Collections
+3. **Deployment**: Commit and push changes - GitHub Actions will automatically run the build with conversion
 
-**Manueller Workflow (optional):**
+**Manual workflow (optional):**
 ```bash
-# CSV-Dateien manuell zu Collections konvertieren
+# Manually convert CSV files to collections
 npm run convert-csv
 
-# Entwicklungsserver starten (konvertiert automatisch)
+# Start development server (converts automatically)
 npm run dev
 ```
 
 ### 5. Deployment
-Nach dem Push wird die GitHub Action automatisch ausgeführt und die Seite wird unter folgender URL verfügbar sein:
+After pushing, the GitHub Action will run automatically and the site will be available at:
 ```
 https://YOUR_GITHUB_USERNAME.github.io/order66/
 ```
 
-## Projektstruktur
+## Project Structure
 
 ```
 order66/
-├── data/                         # CSV-Quelldateien (nicht Teil der Website)
+├── data/                         # CSV source files (not part of the website)
 │   ├── order66_..._2025-07-03.csv
 │   ├── order66_..._2025-07-16.csv
 │   └── order66_..._2025-07-23.csv
 ├── src/
 │   ├── content/
-│   │   ├── config.ts             # Astro Collections Definition
-│   │   └── raids/                # Auto-generierte JSON-Dateien (bei jedem Build neu erstellt)
+│   │   ├── config.ts             # Astro Collections definition
+│   │   └── raids/                # Auto-generated JSON files (recreated on each build)
 │   │       ├── order66_..._2025-07-03.json
 │   │       ├── order66_..._2025-07-16.json
 │   │       └── order66_..._2025-07-23.json
 │   └── pages/
-│       └── index.astro           # Hauptanwendung (verwendet Collections)
+│       └── index.astro           # Main application (uses Collections)
 ├── scripts/
-│   └── convert-csv-to-collections.js  # CSV → JSON Konverter
-├── public/                       # Statische Assets (keine CSV-Dateien mehr)
+│   └── convert-csv-to-collections.js  # CSV → JSON converter
+├── public/                       # Static assets (no CSV files anymore)
 │   ├── favicon.svg
 │   └── .nojekyll
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml            # GitHub Pages Deployment
-├── package.json                  # Mit convert-csv Script
+│       └── deploy.yml            # GitHub Pages deployment
+├── package.json                  # With convert-csv script
 ├── astro.config.mjs
 └── README.md
 ```
 
-## Lokale Entwicklung
+## Local Development
 
 ```bash
-# Dependencies installieren
+# Install dependencies
 npm install
 
-# Development Server starten
+# Start development server
 npm run dev
 
-# Build für Production
+# Build for production
 npm run build
 
-# Preview der Production Build
+# Preview production build
 npm run preview
 ```
 
-## Datenformat
+## Data Format
 
-Die CSV-Dateien sollten folgendes Format haben:
+CSV files should follow this format:
 ```csv
 name,allycode,estimatedScore,lastActualScore,diff,diffPercent
-"Spielername",123456789,1500000,1450000,-50000,-3.33
+"Player Name",123456789,1500000,1450000,-50000,-3.33
 ```
 
-## Technologie-Stack
+## Technology Stack
 
 - **Astro.js 5.12.2** - Static Site Generator
-- **Chart.js 4.4.0** - Datenvisualisierung
-- **TypeScript** - Typsicherheit
-- **GitHub Actions** - Automatisches Deployment
+- **Chart.js 4.4.0** - Data visualization
+- **TypeScript** - Type safety
+- **GitHub Actions** - Automatic deployment
 - **GitHub Pages** - Hosting
 
-## Lizenz
+## License
 
-Dieses Projekt ist für den privaten Gebrauch bestimmt.
+This project is intended for private use.
