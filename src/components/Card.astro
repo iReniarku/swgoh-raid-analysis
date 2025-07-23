@@ -1,0 +1,30 @@
+---
+export interface Props {
+  title: string;
+  icon?: string;
+  actions?: boolean;
+}
+
+const { title, icon = "📊", actions = false } = Astro.props;
+---
+
+<div class="glass-card p-5">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="chart-title">{icon} {title}</h2>
+    {actions && (
+      <div class="flex gap-2">
+        <slot name="actions" />
+      </div>
+    )}
+  </div>
+  
+  <div class="card-content text-gray-300">
+    <slot />
+  </div>
+  
+  {Astro.slots.has('footer') && (
+    <div class="mt-4 pt-4 border-t border-gray-600">
+      <slot name="footer" />
+    </div>
+  )}
+</div>

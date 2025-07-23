@@ -1,0 +1,22 @@
+---
+export interface Props {
+  title: string;
+  canvasId: string;
+  height?: string;
+  description?: string;
+}
+
+const { title, canvasId, height = "600px", description } = Astro.props;
+---
+
+<div class="chart-container">
+  <h2 class="chart-title">{title}</h2>
+  <div class="relative mb-5" style={`height: ${height}`}>
+    <canvas id={canvasId}></canvas>
+  </div>
+  {description && (
+    <div class="mt-4 text-center text-gray-400 text-sm">
+      <p><strong>Legend:</strong> {description}</p>
+    </div>
+  )}
+</div>

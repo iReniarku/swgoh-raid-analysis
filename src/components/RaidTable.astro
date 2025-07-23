@@ -1,0 +1,39 @@
+---
+// This component renders the detailed raid results table
+---
+
+<div class="glass-card p-5 mt-8">
+  <h2 class="chart-title mb-5">📊 Detailed Raid Results for All Players</h2>
+  <div class="mb-5 flex gap-5 items-center flex-wrap">
+    <label class="flex items-center gap-2">
+      <span class="text-gold font-bold">Sort by:</span>
+      <select id="raidTableSort" onchange="updateRaidTable()" class="form-control">
+        <option value="name">Player Name</option>
+        <option value="totalScore">Total Score</option>
+        <option value="avgScore">Average Score</option>
+        <option value="participation">Participation</option>
+      </select>
+    </label>
+    <label class="flex items-center gap-2">
+      <span class="text-gold font-bold">Filter:</span>
+      <input type="text" id="raidTableFilter" placeholder="Player name..." onkeyup="updateRaidTable()" class="form-control">
+    </label>
+  </div>
+  <div class="overflow-x-auto">
+    <table id="raidTable" class="w-full border-collapse text-xs">
+      <thead>
+        <tr>
+          <th class="sticky left-0 bg-yellow-500/30 z-10 table-header px-3 py-2">Player Name</th>
+          <th class="table-header px-3 py-2">Participation</th>
+          <th>Total Score</th>
+          <th>Avg Score</th>
+        </tr>
+      </thead>
+      <tbody id="raidTableBody">
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-4 text-center text-gray-400 text-sm">
+    <p><strong>Interpretation:</strong> Green = Above Average • Red = Below Average • Gray = Did Not Participate</p>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+---
+export interface Props {
+  players: any[];
+  columns: string[];
+  sortable?: boolean;
+}
+
+const { players, columns, sortable = true } = Astro.props;
+---
+
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse text-sm">
+    <thead>
+      <tr>
+        {columns.map((column) => (
+          <th 
+            class:list={[
+              "table-header px-3 py-3 text-left",
+              { "cursor-pointer hover:bg-yellow-500/20": sortable }
+            ]}
+            onclick={sortable ? `sortTable('${column.toLowerCase().replace(' ', '')}')` : undefined}
+          >
+            {column}
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody id="playersTableBody">
+      {players.length === 0 ? (
+        <tr>
+          <td colspan={columns.length} class="text-center py-8 text-gray-400">
+            No data available
+          </td>
+        </tr>
+      ) : (
+        <slot />
+      )}
+    </tbody>
+  </table>
+</div>

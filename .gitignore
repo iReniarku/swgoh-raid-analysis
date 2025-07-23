@@ -3,6 +3,9 @@ dist/
 # generated types
 .astro/
 
+# generated collection files (regenerated on each build)
+src/content/raids/*.json
+
 # dependencies
 node_modules/
 

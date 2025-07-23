@@ -1,0 +1,23 @@
+---
+// This component renders the main player statistics table
+---
+
+<div class="glass-card p-5 overflow-x-auto">
+  <table id="playersTable" class="w-full border-collapse text-sm">
+    <thead>
+      <tr>
+        <th onclick="sortTable('name')" class="table-header px-3 py-3 text-left">Player Name</th>
+        <th onclick="sortTable('allycode')" class="table-header px-3 py-3 text-left">Ally Code</th>
+        <th onclick="sortTable('participation')" class="table-header px-3 py-3 text-left">Participation %</th>
+        <th onclick="sortTable('raidsParticipated')" class="table-header px-3 py-3 text-left">Raids Participated</th>
+        <th onclick="sortTable('totalScore')" class="table-header px-3 py-3 text-left">Total Score</th>
+        <th onclick="sortTable('avgScore')" class="table-header px-3 py-3 text-left">Avg Score</th>
+        <th onclick="sortTable('bestScore')" class="table-header px-3 py-3 text-left">Best Score</th>
+        <th onclick="sortTable('lastActivity')" class="table-header px-3 py-3 text-left">Last Activity</th>
+        <th onclick="sortTable('trend')" class="table-header px-3 py-3 text-left">Trend</th>
+      </tr>
+    </thead>
+    <tbody id="playersTableBody">
+    </tbody>
+  </table>
+</div>
