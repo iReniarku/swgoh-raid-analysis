@@ -17,7 +17,7 @@ const { frontmatter } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${PROJECT_CONFIG.baseUrl}favicon.svg`} />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{frontmatter.title}</title>
@@ -38,6 +38,10 @@ const { frontmatter } = Astro.props;
       <div class="mdx-content max-w-4xl mx-auto glass-card p-3 sm:p-6 mt-6 sm:mt-8">
         <slot />
       </div>
+
+      <script define:vars={{ PROJECT_CONFIG }}>
+        window.PROJECT_CONFIG = PROJECT_CONFIG;
+      </script>
 
       <div class="text-center mt-8 sm:mt-12 py-4 sm:py-6 border-t border-gray-700">
         <div class="flex justify-center mb-2 sm:mb-3">

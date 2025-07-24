@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://YOUR_GITHUB_USERNAME.github.io',
-  base: '/order66',
+  base: process.env.NODE_ENV === 'production' ? '/order66' : '/',
   output: 'static',
   integrations: [mdx()],
 

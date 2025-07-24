@@ -13,7 +13,7 @@ export const PROJECT_CONFIG = {
   githubUrl: import.meta.env.GITHUB_URL || 'https://github.com/DennisBecker/order66',
   
   // Base URL for deployment (GitHub Pages)
-  baseUrl: import.meta.env.BASE_URL || '/order66/',
+  baseUrl: import.meta.env.BASE_URL || (import.meta.env.PROD ? '/order66/' : '/'),
   
   // Project title
   title: `${import.meta.env.PROJECT_NAME || import.meta.env.GITHUB_REPOSITORY_NAME || 'Order 66'} Raid Analysis`,
