@@ -1,11 +1,102 @@
 @import "tailwindcss";
 
+/* Theme Configuration - CSS Custom Properties */
+:root {
+  /* Primary Colors */
+  --color-primary: #FF6B47;
+  --color-primary-rgb: 255, 107, 71;
+  --color-secondary: #55B7D7;
+  --color-secondary-rgb: 85, 183, 215;
+  --color-accent: #00d4ff;
+  --color-accent-rgb: 0, 212, 255;
+  
+  /* Status Colors */
+  --color-success: #22c55e;
+  --color-success-rgb: 34, 197, 94;
+  --color-warning: var(--color-secondary);
+  --color-warning-rgb: var(--color-secondary-rgb);
+  --color-danger: #ef4444;
+  --color-danger-rgb: 239, 68, 68;
+  
+  /* Neutral Colors */
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Background Colors */
+  --color-bg-primary: linear-gradient(135deg, #1a1a2e, #16213e);
+  --color-bg-glass: rgba(255, 255, 255, 0.1);
+  --color-bg-glass-hover: rgba(255, 255, 255, 0.15);
+  
+  /* Text Colors */
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: var(--color-gray-400);
+  --color-text-muted: var(--color-gray-500);
+}
+
+/* Theme Utility Classes */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-accent { color: var(--color-accent); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-danger { color: var(--color-danger); }
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-accent { background-color: var(--color-accent); }
+.bg-success { background-color: var(--color-success); }
+.bg-warning { background-color: var(--color-warning); }
+.bg-danger { background-color: var(--color-danger); }
+
+.bg-primary-10 { background-color: rgba(var(--color-primary-rgb), 0.1); }
+.bg-primary-20 { background-color: rgba(var(--color-primary-rgb), 0.2); }
+.bg-primary-30 { background-color: rgba(var(--color-primary-rgb), 0.3); }
+.bg-secondary-10 { background-color: rgba(var(--color-secondary-rgb), 0.1); }
+.bg-secondary-20 { background-color: rgba(var(--color-secondary-rgb), 0.2); }
+.bg-secondary-30 { background-color: rgba(var(--color-secondary-rgb), 0.3); }
+
+.border-primary { border-color: var(--color-primary); }
+.border-secondary { border-color: var(--color-secondary); }
+.border-accent { border-color: var(--color-accent); }
+
+.shadow-primary { text-shadow: 0 0 10px rgba(var(--color-primary-rgb), 0.5); }
+.shadow-secondary { text-shadow: 0 0 10px rgba(var(--color-secondary-rgb), 0.5); }
+
 /* Custom styles for Star Wars themed design */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
-  color: #e0e0e0;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
   min-height: 100vh;
+}
+
+/* Responsive layout improvements */
+@media (max-width: 768px) {
+  body {
+    padding: 0.5rem;
+  }
+  
+  .mobile-scroll-hint {
+    display: block;
+    text-align: center;
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+    animation: pulse 2s infinite;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-scroll-hint {
+    display: none;
+  }
 }
 
 /* Glass morphism effect */
@@ -13,19 +104,19 @@ body {
   @apply bg-white/10 backdrop-blur-lg border border-white/20 rounded-lg;
 }
 
-/* Gold text for Star Wars theme */
-.text-gold {
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+/* Orange text for theme (titles/headings) */
+.text-heading {
+  color: var(--color-secondary);
+  text-shadow: 0 0 10px rgba(var(--color-secondary-rgb), 0.5);
 }
 
 /* Participation status colors */
 .participation-good {
-  @apply bg-green-500/30;
+  background-color: rgba(76, 175, 80, 0.3); /* Green */
 }
 
 .participation-warning {
-  @apply bg-yellow-500/30;
+  background-color: rgba(240, 145, 85, 0.3); /* #F09155 */
 }
 
 .participation-poor {
@@ -33,7 +124,7 @@ body {
 }
 
 /* Trend indicators */
-.trend-positive { color: #4CAF50; }
+.trend-positive { color: #4CAF50; } /* Green */
 .trend-negative { color: #f44336; }
 .trend-stable { color: #9E9E9E; }
 
@@ -41,7 +132,7 @@ body {
 .mdx-content h1 {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #ffd700;
+  color: var(--color-secondary);
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -49,7 +140,7 @@ body {
 .mdx-content h2 {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #00d4ff;
+  color: var(--color-secondary);
   margin-bottom: 1rem;
   margin-top: 2rem;
 }
@@ -57,7 +148,7 @@ body {
 .mdx-content h3 {
   font-size: 1.25rem;
   font-weight: bold;
-  color: #06b6d4;
+  color: var(--color-secondary);
   margin-bottom: 0.75rem;
   margin-top: 1.5rem;
 }
@@ -65,7 +156,7 @@ body {
 .mdx-content h4 {
   font-size: 1.125rem;
   font-weight: bold;
-  color: #06b6d4;
+  color: var(--color-secondary);
   margin-bottom: 0.5rem;
   margin-top: 1rem;
 }
@@ -119,7 +210,17 @@ body {
 
 /* Button styles */
 .btn-primary {
-  @apply bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition-colors duration-300 border-none cursor-pointer;
+  background-color: #55B7D7;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #4AA3C1;
 }
 
 /* Form controls */
@@ -129,13 +230,37 @@ body {
 
 /* Table styles */
 .table-header {
-  @apply bg-yellow-500/20 font-bold sticky top-0 cursor-pointer select-none hover:bg-yellow-500/30;
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  background-color: rgba(240, 145, 85, 0.2);
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  cursor: pointer;
+  user-select: none;
+  color: white;
+  text-shadow: 0 0 10px rgba(240, 145, 85, 0.5);
 }
 
-.table-row {
-  @apply hover:bg-white/10 border-b border-white/10;
+.table-header:hover {
+  background-color: rgba(240, 145, 85, 0.3);
+}
+
+/* Table row hover effect */
+tbody tr:hover {
+  background-color: rgba(var(--color-primary-rgb), 0.25);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Enhance hover effect for cells with background colors */
+tbody tr:hover td[class*="percentage-"] {
+  filter: brightness(1.2);
+  transition: filter 0.2s ease;
+}
+
+/* Exclude footer from hover effect */
+tbody tr.table-footer:hover {
+  background-color: transparent;
+  cursor: default;
 }
 
 /* Chart container */
@@ -147,50 +272,257 @@ body {
   border-radius: 0.5rem;
 }
 
-.chart-title {
-  @apply mb-5 text-xl text-center;
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-}
-
 /* Additional table cell styles for JavaScript-generated content */
 .table-cell-sticky {
   position: sticky;
   left: 0;
-  background: rgba(0, 0, 0, 0.8);
-  border-right: 2px solid #ffd700;
-  font-weight: bold;
-  color: #ffd700;
-  padding: 8px 12px;
+  border-right: 2px solid #F09155;
+  font-weight: normal;
+  color: inherit;
+  z-index: 10;
 }
 
 .table-cell-center {
   text-align: center;
-  padding: 8px 12px;
 }
 
 .table-cell-center-bold {
   text-align: center;
   font-weight: bold;
-  padding: 8px 12px;
+  padding: 0.5rem;
+}
+
+/* Percentage color gradient classes */
+.percentage-very-low {
+  background-color: rgba(220, 38, 38, 0.8) !important; /* Red */
+  color: white;
+  font-weight: bold;
+}
+
+.percentage-low {
+  background-color: rgba(239, 68, 68, 0.8) !important; /* Light Red */
+  color: white;
+  font-weight: bold;
+}
+
+.percentage-below-avg {
+  background-color: rgba(251, 146, 60, 0.8) !important; /* Orange */
+  color: white;
+  font-weight: bold;
+}
+
+.percentage-avg {
+  background-color: rgba(250, 204, 21, 0.8) !important; /* Yellow */
+  color: white;
+  font-weight: bold;
+}
+
+.percentage-good {
+  background-color: rgba(132, 204, 22, 0.8) !important; /* Light Green */
+  color: white;
+  font-weight: bold;
+}
+
+.percentage-excellent {
+  background-color: rgba(34, 197, 94, 0.8) !important; /* Green */
+  color: white;
+  font-weight: bold;
+}
+
+.percentage-outstanding {
+  background-color: rgba(16, 185, 129, 0.8) !important; /* Dark Green */
+  color: white;
+  font-weight: bold;
+}
+
+/* Table footer styles */
+.table-footer {
+  border-top: 2px solid #F09155;
+  font-weight: bold;
+}
+
+.table-footer td {
+  padding: 12px 8px;
+  text-align: center;
+  border-top: 2px solid #F09155;
+}
+
+.table-footer .table-cell-sticky {
+  border-right: 2px solid #F09155;
+  font-weight: bold;
+  z-index: 20;
 }
 
 .table-cell-inactive {
   text-align: center;
   color: #666;
-  padding: 8px 12px;
+  padding: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .table-cell-inactive {
+    padding: 0.75rem;
+  }
 }
 
 .table-cell-above-avg {
   text-align: center;
-  color: #4CAF50;
+  color: #55B7D7;
   font-weight: bold;
-  padding: 8px 12px;
+  padding: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .table-cell-above-avg {
+    padding: 0.75rem;
+  }
 }
 
 .table-cell-below-avg {
   text-align: center;
   color: #f44336;
   font-weight: bold;
-  padding: 8px 12px;
+  padding: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .table-cell-below-avg {
+    padding: 0.75rem;
+  }
+}
+
+/* Mobile responsive improvements */
+@media (max-width: 768px) {
+  /* Mobile table improvements */
+  .mobile-table-wrapper {
+    position: relative;
+  }
+  
+  .mobile-table-wrapper::before {
+    content: "👈 Swipe to see more columns";
+    position: absolute;
+    top: -25px;
+    right: 0;
+    font-size: 0.75rem;
+    color: #55B7D7;
+    animation: pulse 2s infinite;
+  }
+  
+  .table-header {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+    white-space: nowrap;
+  }
+  
+  .table-cell-sticky,
+  .table-cell-center,
+  .table-cell-center-bold,
+  .table-cell-inactive,
+  .table-cell-above-avg,
+  .table-cell-below-avg {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+    white-space: nowrap;
+  }
+  
+  .table-cell-sticky {
+    background: rgba(0, 0, 0, 0.95) !important;
+    z-index: 15;
+  }
+  
+  /* Mobile filter controls */
+  .mobile-filter-stack {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .mobile-filter-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .mobile-filter-row label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  /* Mobile chart containers */
+  .chart-container {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Mobile stat cards */
+  .mobile-stat-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  
+  /* Mobile form controls */
+  .form-control {
+    padding: 12px;
+    font-size: 1rem;
+    min-height: 44px; /* Better touch targets */
+  }
+  
+  .btn-primary {
+    padding: 12px 16px;
+    font-size: 1rem;
+    min-height: 44px; /* Better touch targets */
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Mobile navigation improvements */
+  .mobile-nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Mobile logo sizing */
+  .mobile-logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  /* Mobile title sizing */
+  .mobile-title {
+    font-size: 1.75rem;
+    text-align: center;
+  }
+  
+  /* Mobile content padding */
+  .mobile-content {
+    padding: 0.5rem;
+  }
+}
+
+/* Tablet improvements */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .table-header {
+    font-size: 0.875rem;
+    padding: 8px 10px;
+  }
+  
+  .table-cell-sticky,
+  .table-cell-center,
+  .table-cell-center-bold,
+  .table-cell-inactive,
+  .table-cell-above-avg,
+  .table-cell-below-avg {
+    font-size: 0.875rem;
+    padding: 8px 10px;
+  }
+  
+  .table-cell-sticky {
+    background: rgba(0, 0, 0, 0.9) !important;
+    z-index: 12;
+  }
+  
+  .chart-container {
+    padding: 1.5rem;
+  }
 }

@@ -2,22 +2,39 @@
 // This component renders the main player statistics table
 ---
 
-<div class="glass-card p-5 overflow-x-auto">
-  <table id="playersTable" class="w-full border-collapse text-sm">
-    <thead>
-      <tr>
-        <th onclick="sortTable('name')" class="table-header px-3 py-3 text-left">Player Name</th>
-        <th onclick="sortTable('allycode')" class="table-header px-3 py-3 text-left">Ally Code</th>
-        <th onclick="sortTable('participation')" class="table-header px-3 py-3 text-left">Participation %</th>
-        <th onclick="sortTable('raidsParticipated')" class="table-header px-3 py-3 text-left">Raids Participated</th>
-        <th onclick="sortTable('totalScore')" class="table-header px-3 py-3 text-left">Total Score</th>
-        <th onclick="sortTable('avgScore')" class="table-header px-3 py-3 text-left">Avg Score</th>
-        <th onclick="sortTable('bestScore')" class="table-header px-3 py-3 text-left">Best Score</th>
-        <th onclick="sortTable('lastActivity')" class="table-header px-3 py-3 text-left">Last Activity</th>
-        <th onclick="sortTable('trend')" class="table-header px-3 py-3 text-left">Trend</th>
-      </tr>
-    </thead>
-    <tbody id="playersTableBody">
-    </tbody>
-  </table>
+<div class="glass-card p-3 sm:p-5 mt-6 sm:mt-8">
+  <h2 class="text-heading mb-3 sm:mb-5 text-center text-sm sm:text-xl">📋 Player Statistics Overview</h2>
+  <div class="mb-3 sm:mb-5 flex flex-col sm:flex-row gap-3 sm:gap-5 items-stretch sm:items-center">
+    <label class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+      <span class="text-heading font-bold text-sm sm:text-base">Sort by:</span>
+      <select id="sortBy" onchange="applyFilters()" class="form-control">
+        <option value="participation">Participation %</option>
+        <option value="avgEstimate">Average Estimate</option>
+        <option value="bestScore">Best Score</option>
+        <option value="lastScore">Last Score</option>
+        <option value="efficiency">Efficiency %</option>
+        <option value="name">Player Name</option>
+      </select>
+    </label>
+  </div>
+  <div class="mobile-scroll-hint">👈 Swipe to see more columns</div>
+  <div class="overflow-x-auto mobile-table-wrapper">
+    <table id="playersTable" class="w-full border-collapse text-xs sm:text-sm">
+      <thead>
+        <tr>
+          <th onclick="sortTable('name')" class="table-header px-2 sm:px-3 py-2 sm:py-3 text-left">Player Name</th>
+          <th onclick="sortTable('allycode')" class="table-header px-2 sm:px-3 py-2 sm:py-3 text-left">Ally Code</th>
+          <th onclick="sortTable('participation')" class="table-header px-2 sm:px-3 py-2 sm:py-3 text-left">Participation %</th>
+          <th onclick="sortTable('raidsParticipated')" class="table-header px-2 sm:px-3 py-2 sm:py-3 text-left">Raids (Last 5)</th>
+          <th onclick="sortTable('avgEstimate')" class="table-header px-2 sm:px-3 py-2 sm:py-3 text-left">Avg Estimate</th>
+          <th onclick="sortTable('bestScore')" class="table-header px-2 sm:px-3 py-2 sm:py-3 text-left">Best Score</th>
+          <th onclick="sortTable('lastScore')" class="table-header px-2 sm:px-3 py-2 sm:py-3 text-left">Last Score</th>
+          <th onclick="sortTable('efficiency')" class="table-header px-2 sm:px-3 py-2 sm:py-3 text-left">Efficiency %</th>
+          <th onclick="sortTable('trend')" class="table-header px-2 sm:px-3 py-2 sm:py-3 text-left">Trend</th>
+        </tr>
+      </thead>
+      <tbody id="playersTableBody">
+      </tbody>
+    </table>
+  </div>
 </div>

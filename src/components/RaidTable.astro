@@ -2,38 +2,31 @@
 // This component renders the detailed raid results table
 ---
 
-<div class="glass-card p-5 mt-8">
-  <h2 class="chart-title mb-5">📊 Detailed Raid Results for All Players</h2>
-  <div class="mb-5 flex gap-5 items-center flex-wrap">
-    <label class="flex items-center gap-2">
-      <span class="text-gold font-bold">Sort by:</span>
+<div class="glass-card p-3 sm:p-5 mt-6 sm:mt-8">
+  <h2 class="text-heading mb-3 sm:mb-5 text-center text-sm sm:text-xl">📊 Detailed Raid Results (Last 5 Raids)</h2>
+  <div class="mb-3 sm:mb-5 flex flex-col sm:flex-row gap-3 sm:gap-5 items-stretch sm:items-center">
+    <label class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+      <span class="text-heading font-bold text-sm sm:text-base">Sort by:</span>
       <select id="raidTableSort" onchange="updateRaidTable()" class="form-control">
+        <option value="avgEstimate">Average Estimate</option>
         <option value="name">Player Name</option>
-        <option value="totalScore">Total Score</option>
-        <option value="avgScore">Average Score</option>
-        <option value="participation">Participation</option>
       </select>
     </label>
-    <label class="flex items-center gap-2">
-      <span class="text-gold font-bold">Filter:</span>
-      <input type="text" id="raidTableFilter" placeholder="Player name..." onkeyup="updateRaidTable()" class="form-control">
-    </label>
   </div>
-  <div class="overflow-x-auto">
-    <table id="raidTable" class="w-full border-collapse text-xs">
+  <div class="mobile-scroll-hint">👈 Swipe to see all raid dates</div>
+  <div class="overflow-x-auto mobile-table-wrapper">
+    <table id="raidTable" class="w-full border-collapse text-xs sm:text-sm">
       <thead>
         <tr>
-          <th class="sticky left-0 bg-yellow-500/30 z-10 table-header px-3 py-2">Player Name</th>
-          <th class="table-header px-3 py-2">Participation</th>
-          <th>Total Score</th>
-          <th>Avg Score</th>
+          <th class="sticky left-0 z-20 table-header px-2 sm:px-3 py-2 sm:py-3 text-left border-r-2 border-secondary">Player Name</th>
+          <th class="table-header px-2 sm:px-3 py-2 sm:py-3 text-left">Avg Estimate</th>
         </tr>
       </thead>
       <tbody id="raidTableBody">
       </tbody>
     </table>
   </div>
-  <div class="mt-4 text-center text-gray-400 text-sm">
-    <p><strong>Interpretation:</strong> Green = Above Average • Red = Below Average • Gray = Did Not Participate</p>
+  <div class="mt-3 sm:mt-4 text-center text-gray-400 text-xs sm:text-sm">
+    <p><strong>Legend:</strong> Blue = Above Average • Red = Below Average • Gray = Did Not Participate • Max/Est = Best Score / Max Estimated</p>
   </div>
 </div>

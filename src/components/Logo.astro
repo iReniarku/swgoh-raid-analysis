@@ -5,7 +5,9 @@ export interface Props {
   className?: string;
 }
 
-const { size = 'md', showText = true, className = '' } = Astro.props;
+const { size = 'md', showText = false, className = '' } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+const logoPath = baseUrl.endsWith('/') ? `${baseUrl}bataillon-logo.png` : `${baseUrl}/bataillon-logo.png`;
 
 const sizeClasses = {
   sm: 'w-8 h-8',
@@ -24,52 +26,14 @@ const textSizes = {
 
 <div class={`flex items-center gap-3 ${className}`}>
   <div class={sizeClasses[size]}>
-    <svg viewBox="0 0 100 100" class="w-full h-full">
-      <defs>
-        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
-        </linearGradient>
-        <linearGradient id="innerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#0891b2;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
-        </linearGradient>
-      </defs>
-      
-      <!-- Outer hexagon -->
-      <polygon 
-        points="50,5 85,27.5 85,72.5 50,95 15,72.5 15,27.5" 
-        fill="url(#logoGradient)" 
-        stroke="#0891b2" 
-        stroke-width="2"
-      />
-      
-      <!-- Inner design - stylized "B" -->
-      <g fill="url(#innerGradient)">
-        <!-- Main vertical bar -->
-        <rect x="25" y="25" width="8" height="50" fill="white" />
-        
-        <!-- Top curve -->
-        <path d="M 33 25 Q 55 25 55 37.5 Q 55 45 45 45 L 33 45 Z" fill="white" />
-        
-        <!-- Bottom curve -->
-        <path d="M 33 45 Q 60 45 60 62.5 Q 60 75 45 75 L 33 75 Z" fill="white" />
-        
-        <!-- Central connector -->
-        <rect x="33" y="42" width="12" height="6" fill="white" />
-      </g>
-      
-      <!-- Accent lines -->
-      <g stroke="#67e8f9" stroke-width="2" fill="none" opacity="0.7">
-        <line x1="70" y1="20" x2="75" y2="15" />
-        <line x1="75" y1="25" x2="80" y2="20" />
-        <line x1="70" y1="80" x2="75" y2="85" />
-        <line x1="75" y1="75" x2="80" y2="80" />
-      </g>
-    </svg>
+    <img 
+      src={logoPath} 
+      alt="Bataillon Logo" 
+      class="w-full h-full object-contain rounded-full"
+    />
   </div>
   {showText && (
-    <span class={`font-bold text-cyan-400 ${textSizes[size]} tracking-wider`}>
+    <span class={`font-bold text-heading ${textSizes[size]} tracking-wider`}>
       BATAILLON
     </span>
   )}

@@ -8,7 +8,7 @@ export interface Props {
 const { title, value, id } = Astro.props;
 ---
 
-<div class="glass-card p-5">
-  <h3 class="text-gold mb-2 text-lg">{title}</h3>
-  <div class="text-3xl font-bold text-green-500" id={id}>{value}</div>
+<div class="glass-card p-3 sm:p-5">
+  <h3 class="text-heading mb-1 sm:mb-2 text-sm sm:text-lg font-medium">{title}</h3>
+  <div class="text-xl sm:text-3xl font-bold text-primary" id={id}>{value}</div>
 </div>

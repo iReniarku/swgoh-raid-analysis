@@ -22,25 +22,27 @@ const { frontmatter } = Astro.props;
     <title>{frontmatter.title}</title>
   </head>
   
-  <body class="p-5">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col items-center mb-6">
-        <Logo size="xl" className="mb-4" />
-        <h1 class="text-center text-gold text-4xl">🛸 Order 66 Raid Analysis</h1>
-        <p class="text-center text-gray-400 text-sm mt-2">Star Wars: Galaxy of Heroes Guild Analytics</p>
+  <body class="p-2 sm:p-5">
+    <div class="max-w-7xl mx-auto mobile-content">
+      <div class="flex flex-col items-center mb-4 sm:mb-6">
+        <div class="flex items-center gap-3 mb-2 sm:mb-4">
+          <Logo size="lg" className="mobile-logo" />
+          <h1 class="text-center text-heading text-2xl sm:text-4xl mobile-title">Order 66 Raid Analysis</h1>
+        </div>
+        <p class="text-center text-gray-400 text-xs sm:text-sm mt-1 sm:mt-2">Star Wars: Galaxy of Heroes Guild Analytics</p>
       </div>
       
       <Navigation />
       
-      <div class="mdx-content max-w-4xl mx-auto">
+      <div class="mdx-content max-w-4xl mx-auto glass-card p-3 sm:p-6 mt-6 sm:mt-8">
         <slot />
       </div>
 
-      <div class="text-center mt-12 py-6 border-t border-gray-700">
-        <div class="flex justify-center mb-3">
+      <div class="text-center mt-8 sm:mt-12 py-4 sm:py-6 border-t border-gray-700">
+        <div class="flex justify-center mb-2 sm:mb-3">
           <Logo size="sm" />
         </div>
-        <p class="text-gray-400 text-sm">Order 66 Raid Analysis for Star Wars: Galaxy of Heroes</p>
+        <p class="text-gray-400 text-xs sm:text-sm">Order 66 Raid Analysis for Star Wars: Galaxy of Heroes</p>
         <p class="text-gray-500 text-xs mt-1">Built with Astro.js • Automatically updated based on CSV files from Wookiebot</p>
       </div>
     </div>

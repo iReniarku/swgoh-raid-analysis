@@ -10,13 +10,31 @@ const { title, canvasId, height = "600px", description } = Astro.props;
 ---
 
 <div class="chart-container">
-  <h2 class="chart-title">{title}</h2>
-  <div class="relative mb-5" style={`height: ${height}`}>
+  <h2 class="text-heading mb-3 sm:mb-5 text-center text-sm sm:text-xl">{title}</h2>
+  <div class="relative mb-5 chart-responsive-container">
     <canvas id={canvasId}></canvas>
   </div>
   {description && (
-    <div class="mt-4 text-center text-gray-400 text-sm">
+    <div class="mt-4 text-center text-gray-400 text-xs sm:text-sm">
       <p><strong>Legend:</strong> {description}</p>
     </div>
   )}
 </div>
+
+<style>
+  .chart-responsive-container {
+    height: var(--chart-height, 600px);
+  }
+  
+  @media (max-width: 768px) {
+    .chart-responsive-container {
+      height: 300px;
+    }
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .chart-responsive-container {
+      height: 400px;
+    }
+  }
+</style>
