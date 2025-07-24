@@ -28,6 +28,11 @@ jobs:
           package-manager: npm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
         env:
           NODE_ENV: production # Ensures correct base path for GitHub Pages
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REPOSITORY_NAME: ${{ github.event.repository.name }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          PROJECT_NAME: ${{ github.event.repository.name }}
+          GITHUB_URL: https://github.com/${{ github.repository }}
 
   deploy:
     needs: build

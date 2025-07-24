@@ -5,6 +5,7 @@ import StatCard from '../components/StatCard.astro';
 import ChartContainer from '../components/ChartContainer.astro';
 import PlayerTable from '../components/PlayerTable.astro';
 import RaidTable from '../components/RaidTable.astro';
+import { PROJECT_CONFIG } from '../config/project.ts';
 import '../styles/global.css';
 
 const allRaids = await getCollection('raids');
@@ -150,10 +151,10 @@ const avgEfficiency = activePlayers > 0
   : '0.0';
 const lastRaidDate = totalRaids > 0 ? allRaidData[allRaidData.length - 1].date : '-';
 
-const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = PROJECT_CONFIG.baseUrl;
 ---
 
-<Layout title="Order 66 Raid Analysis - SWGoH">
+<Layout title={`${PROJECT_CONFIG.title} - SWGoH`}>
   <div class="text-center mb-4">
     <div class="inline-block bg-cyan-500/20 border border-cyan-500/30 rounded-lg px-4 py-2">
       <span class="text-cyan-400 font-semibold">📊 Analysis based on last {last5RaidsCount} raids</span>

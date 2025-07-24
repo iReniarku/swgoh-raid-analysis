@@ -1,14 +1,15 @@
 ---
 layout: ../../components/MDXLayout.astro
-title: "About Order 66 Raid Analysis"
+title: "About Raid Analysis Tool"
 ---
 
 import Card from '../../components/Card.astro';
+import { PROJECT_CONFIG } from '../../config/project.ts';
 
 <div class="max-w-4xl mx-auto">
   <div class="text-center mb-12">
-    <h1 class="text-4xl font-bold text-heading mb-4">About Order 66</h1>
-    <p class="text-xl text-gray-300">Advanced Guild Analytics for Star Wars: Galaxy of Heroes</p>
+    <h1 class="text-4xl font-bold text-heading mb-4">About {PROJECT_CONFIG.name}</h1>
+    <p class="text-xl text-gray-300">{PROJECT_CONFIG.description}</p>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -68,6 +69,6 @@ import Card from '../../components/Card.astro';
     <p class="text-gray-300 mb-2">
       Upload your Wookiebot CSV files and start tracking your raid performance today.
     </p>
-    <a href={import.meta.env.BASE_URL} class="btn-primary inline-flex items-center gap-2 !text-gray-300">📊 Go to Dashboard</a>
+    <a href={PROJECT_CONFIG.baseUrl} class="btn-primary inline-flex items-center gap-2 !text-gray-300">📊 Go to Dashboard</a>
   </div>
 </div>

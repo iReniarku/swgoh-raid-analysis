@@ -1,11 +1,12 @@
 ---
+import { PROJECT_CONFIG } from '../config/project.ts';
+
 const currentPath = Astro.url.pathname;
-const baseUrl = import.meta.env.BASE_URL;
 
 // Ensure proper URL construction
 const buildUrl = (path: string) => {
-  if (baseUrl === '/') return path;
-  return `${baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl}${path}`;
+  if (PROJECT_CONFIG.baseUrl === '/') return path;
+  return `${PROJECT_CONFIG.baseUrl.endsWith('/') ? PROJECT_CONFIG.baseUrl.slice(0, -1) : PROJECT_CONFIG.baseUrl}${path}`;
 };
 
 const navItems = [
