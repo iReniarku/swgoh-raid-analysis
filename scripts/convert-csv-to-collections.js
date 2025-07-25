@@ -44,8 +44,21 @@ function parseCSV(csvText, raidDate) {
 }
 
 function extractDateFromFilename(filename) {
-  const match = filename.match(/(\d{4}-\d{2}-\d{2})/);
-  return match ? match[1] : 'Unknown';
+  // New format: {raid}_{guildId}_{timestamp}.csv
+  const timestampMatch = filename.match(/_(\d{13})\.csv$/);
+  if (timestampMatch) {
+    const timestamp = timestampMatch[1];
+    const date = new Date(parseInt(timestamp));
+    return date.toISOString().split('T')[0];
+  }
+  
+  // Fallback: try to match old format YYYY-MM-DD
+  const oldFormatMatch = filename.match(/(\d{4}-\d{2}-\d{2})/);
+  if (oldFormatMatch) {
+    return oldFormatMatch[1];
+  }
+  
+  return 'Unknown';
 }
 
 // Convert CSV files to JSON for Astro collections

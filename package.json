@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run convert-csv && astro dev",
     "build": "npm run convert-csv && astro build",
     "preview": "astro preview",
     "convert-csv": "node scripts/convert-csv-to-collections.js",
