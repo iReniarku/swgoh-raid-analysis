@@ -7,7 +7,7 @@ A web application for analyzing Order 66 raid data from Star Wars: Galaxy of Her
 ## Features
 
 - 📊 Interactive charts for visualizing raid performance
-- 🏆 Performance ranking over time
+- 🏆 Performance points tracking over time
 - 📈 Detailed player statistics
 - 🔍 Filterable and sortable tables
 - 📥 Data export as CSV
