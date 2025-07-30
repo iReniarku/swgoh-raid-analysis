@@ -9,45 +9,78 @@ import GitHubLink from '../../components/GitHubLink.astro';
 # 🛸 Order 66 Raid Analysis - Help Guide
 
 <Card title="Getting Started" icon="🚀">
-  Welcome to the Order 66 Raid Analysis tool! This application automatically analyzes your guild's raid performance based on CSV files exported from Wookiebot.
+  Welcome to the Order 66 Raid Analysis tool! This application automatically analyzes your guild's raid performance based on CSV files from Wookiebot.
 
-  ## Quick Start
-  1. Export your raid data from Wookiebot as CSV files
-  2. Name the files in the format `yyyy-mm-dd.csv` (e.g., `2025-07-23.csv`)
-  3. Place your CSV files in the `data/` directory
-  4. Run `npm run build` to process the data
-  5. View your results in the dashboard
+  ## Quick Setup
 
-  ## File Naming Convention
-  - **Format**: `yyyy-mm-dd.csv` (ISO date format)
-  - **Examples**: 
-    - `2025-07-23.csv` ✅
-    - `2025-12-01.csv` ✅ 
-    - `raid-data.csv` ❌ (incorrect format)
-    - `23-07-2025.csv` ❌ (wrong date format)
+  ### 1. Fork the Repository
+  1. Go to [https://github.com/DennisBecker/order66](https://github.com/DennisBecker/order66)
+  2. Click the "Fork" button in the top right corner
+  3. This creates your own copy of the repository under your GitHub account
+
+  ### 2. Enable GitHub Pages
+  1. Go to your forked repository on GitHub
+  2. Navigate to **Settings** → **Pages** (in the left sidebar)
+  3. Under **Source**, select **"GitHub Actions"**
+  4. The workflow will be automatically detected
+
+  ### 3. Clean Up Sample Data
+  1. In your forked repository, navigate to the `/data` folder
+  2. Delete all existing CSV files (these are sample data)
+  3. The folder should be empty after this step
+
+  ### 4. Generate Your Guild Data
+  1. In Star Wars: Galaxy of Heroes, use the Wookiebot command:
+     ```
+     /raid guild
+     ```
+     Add your desired parameters (effort level, etc.)
+  2. Download the generated CSV file from Wookiebot
+
+  ### 5. Upload Your Data
+  1. In your GitHub repository, navigate to the `/data` folder
+  2. Click **"Add file"** → **"Upload files"**
+  3. Upload your downloaded CSV file(s)
+  4. Commit the changes with a message like "Add raid data"
+
+  ### 6. Automatic Deployment
+  - GitHub Actions will automatically build and deploy your site
+  - Your analysis will be available at: `https://YOUR_USERNAME.github.io/REPOSITORY_NAME/`
+  - The build process takes 2-3 minutes
+
+  ### 7. Adding More Data
+  - Repeat steps 4-5 whenever you want to add new raid data
+  - The site automatically updates with each new CSV file upload
+
+  ### 8. Updating Your Fork (Getting New Features)
+  When the original repository gets updates with new features or bug fixes:
+
+  1. Go to your forked repository on GitHub
+  2. Click the **"Sync fork"** button (if available) or:
+  3. **Manual sync via GitHub web interface**:
+     - Click **"Compare"** → switch the comparison to see updates from original
+     - Create a pull request from the original repository to your fork
+     - Merge the pull request to get the updates
+  4. **Alternative - Delete and re-fork**:
+     - If you haven't made custom changes, simply delete your fork
+     - Fork the repository again to get the latest version
+     - Re-upload your CSV data
 </Card>
 
-<Card title="Understanding the Data" icon="📊">
-  ## Key Metrics
+<Card title="Wookiebot Commands" icon="🤖">
+  ## Command Examples
+  ```
+  /raid guild
+  /raid guild effort:high
+  ```
 
-  - **Participation %**: Percentage of raids a player has participated in
-  - **Total Score**: Sum of all raid scores for a player
-  - **Average Score**: Average score per raid (only counting participated raids)
-  - **Trend**: Rising, Falling, or Stable based on recent performance
+  ## Parameters
+  - **effort**: Analysis effort level - `low`, `medium` (default), `high`
 
-  ## Color Coding
-  - 🟢 **Green**: Above average performance
-  - 🔴 **Red**: Below average performance  
-  - ⚫ **Gray**: Did not participate in that raid
-</Card>
-
-<Card title="CSV File Format" icon="📄">
-  ## Expected CSV Structure
-  Your Wookiebot CSV files should contain the following columns:
-
+  ## Expected CSV Format
   ```csv
-  "name","allycode","estimatedScore","lastActualScore","diff","diffPercent"
-  "Player Name","123456789",4518000,2180000,-2338000,-51.7
+  name,allycode,estimatedScore,lastActualScore,diff,diffPercent
+  "Player Name",123456789,1500000,1450000,-50000,-3.33
   ```
 
   ### Column Descriptions
@@ -57,11 +90,22 @@ import GitHubLink from '../../components/GitHubLink.astro';
   - **lastActualScore**: Actual score achieved in the raid
   - **diff**: Difference between estimated and actual score
   - **diffPercent**: Percentage difference
+</Card>
 
-  ## Data Processing
-  - Files are automatically converted to JSON during the build process
-  - Multiple raid dates are compared to show trends over time
-  - Missing participation is tracked (0 scores indicate no participation)
+<Card title="Understanding the Data" icon="📊">
+  ## Key Metrics
+
+  - **Participation %**: Percentage of raids a player has participated in (last 5 raids)
+  - **Average Estimate**: Average estimated score per raid
+  - **Best Score**: Highest actual score achieved
+  - **Last Score**: Most recent raid score
+  - **Efficiency %**: Actual vs estimated performance ratio
+  - **Trend**: Rising, Falling, or Stable based on recent performance
+
+  ## Color Coding
+  - 🟢 **Green**: Above average performance
+  - 🔴 **Red**: Below average performance  
+  - ⚫ **Gray**: Did not participate in that raid
 </Card>
 
 <Card title="Features" icon="⭐">
@@ -69,37 +113,34 @@ import GitHubLink from '../../components/GitHubLink.astro';
 
   ### 📈 Charts
   - **Total Points Over Time**: Shows guild-wide performance trends
-  - **Performance Ranking**: Individual player ranking over time
+  - **Performance Points Over Time**: Individual player scores over time
 
   ### 🔍 Filtering
   - Sort by various metrics (participation, score, name, etc.)
-  - Filter by minimum participation percentage
-  - Search by player name
+  - Search by player name in tables
 
-  ### 📋 Export
-  - Export filtered results to CSV
-  - Includes all visible player statistics
+  ### 📋 Tables
+  - **Player Statistics**: Overview of all players
+  - **Raid Details**: Detailed view of last 5 raids with individual scores
 </Card>
 
 <Card title="Troubleshooting" icon="🛠️">
   ## Common Issues
 
+  ### Site Not Loading
+  - Check that GitHub Pages is enabled in your repository settings
+  - Verify that GitHub Actions completed successfully (check the "Actions" tab)
+  - Wait 2-3 minutes after upload for the build to complete
+
   ### No Data Showing
-  - Ensure CSV files are in the `data/` directory
-  - Check that files are named in `yyyy-mm-dd.csv` format
-  - Verify files contain the expected column structure from Wookiebot
-  - Run `npm run build` to process new files
-  - Check the build process completed successfully
+  - Ensure CSV files are uploaded to the `/data` folder (not the root)
+  - Check that CSV files follow the Wookiebot format
+  - Verify that the CSV files contain actual data (not empty)
 
-  ### Incorrect Player Data
-  - Verify CSV files are exported directly from Wookiebot
-  - Ensure player names and ally codes match across different raid dates
-  - Check for special characters in player names that might cause issues
-
-  ### Performance Issues  
-  - Large datasets may take time to load
-  - Consider filtering to reduce displayed data
-  - Modern browsers work best with this application
+  ### Build Failures
+  - Check the "Actions" tab in your GitHub repository for error details
+  - Ensure CSV files are valid and not corrupted
+  - Try re-uploading the CSV files
 
   <div slot="footer">
     Need more help? Check the <GitHubLink>GitHub repository</GitHubLink> for detailed documentation.

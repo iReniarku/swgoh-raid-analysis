@@ -13,79 +13,43 @@ A web application for analyzing Order 66 raid data from Star Wars: Galaxy of Her
 - 📥 Data export as CSV
 - 🌟 Star Wars-inspired dark design
 
-## GitHub Pages Setup
+## Getting Started
 
-### 1. Repository Setup
-1. Create a new GitHub repository named `order66` (or any name you prefer)
-2. Push this code to the repository
+### 1. Use This Template
+1. Click the **"Use this template"** button at the top of this repository
+2. Choose **"Create a new repository"**
+3. Give your repository a name (e.g., `my-guild-raids`, `order66-analysis`)
+4. Make sure it's set to **Public** (required for GitHub Pages)
+5. Click **"Create repository from template"**
 
-### 2. GitHub Pages Configuration
-1. Go to your repository settings on GitHub
-2. Navigate to the "Pages" section in the left sidebar
-3. Under "Source" select "GitHub Actions"
-4. The workflow file `.github/workflows/deploy.yml` will be automatically detected
+### 2. Enable GitHub Pages
+1. Go to your new repository on GitHub
+2. Navigate to **Settings** → **Pages** (in the left sidebar)
+3. Under **Source**, select **"GitHub Actions"**
+4. The workflow will be automatically detected
 
-### 3. Configuration Adjustment
-1. Open `astro.config.mjs`
-2. Replace `YOUR_GITHUB_USERNAME` with your GitHub username
-3. If your repository has a different name than `order66`, adjust the `base` path accordingly
+### 3. Add Your Guild Data
+1. In Star Wars: Galaxy of Heroes, use the Wookiebot command:
+   ```
+   /raid guild
+   ```
+   Add your desired parameters (effort level, etc.)
+2. Download the generated CSV file from Wookiebot
 
-**Note for local development:**
-- For local development, `base: '/'` is automatically used (no `/order66` in the URL)
-- For production/GitHub Pages, `base: '/order66'` is used
-- The configuration automatically adapts to the environment
+### 4. Upload Your Data
+1. In your GitHub repository, navigate to the `/data` folder
+2. Click **"Add file"** → **"Upload files"**
+3. Upload your downloaded CSV file(s)
+4. Commit the changes with a message like "Add raid data"
 
-### 4. Adding CSV Files
-**Automatic workflow with Astro Collections:**
+### 5. Automatic Deployment
+- GitHub Actions will automatically build and deploy your site
+- Your analysis will be available at: `https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/`
+- The build process takes 2-3 minutes
 
-1. **Add new CSV files**: Copy new CSV files to the `data/` directory in the project root
-2. **Automatic conversion**: During the build process (`npm run build`), CSV files are automatically converted to Astro Collections
-3. **Deployment**: Commit and push changes - GitHub Actions will automatically run the build with conversion
-
-**Manual workflow (optional):**
-```bash
-# Manually convert CSV files to collections
-npm run convert-csv
-
-# Start development server (converts automatically)
-npm run dev
-```
-
-### 5. Deployment
-After pushing, the GitHub Action will run automatically and the site will be available at:
-```
-https://YOUR_GITHUB_USERNAME.github.io/order66/
-```
-
-## Project Structure
-
-```
-order66/
-├── data/                         # CSV source files (not part of the website)
-│   ├── order66_..._2025-07-03.csv
-│   ├── order66_..._2025-07-16.csv
-│   └── order66_..._2025-07-23.csv
-├── src/
-│   ├── content/
-│   │   ├── config.ts             # Astro Collections definition
-│   │   └── raids/                # Auto-generated JSON files (recreated on each build)
-│   │       ├── order66_..._2025-07-03.json
-│   │       ├── order66_..._2025-07-16.json
-│   │       └── order66_..._2025-07-23.json
-│   └── pages/
-│       └── index.astro           # Main application (uses Collections)
-├── scripts/
-│   └── convert-csv-to-collections.js  # CSV → JSON converter
-├── public/                       # Static assets (no CSV files anymore)
-│   ├── favicon.svg
-│   └── .nojekyll
-├── .github/
-│   └── workflows/
-│       └── deploy.yml            # GitHub Pages deployment
-├── package.json                  # With convert-csv script
-├── astro.config.mjs
-└── README.md
-```
+### 6. Adding More Data
+- Repeat steps 3-4 whenever you want to add new raid data
+- The site automatically updates with each new CSV file upload
 
 ## Local Development
 
@@ -105,11 +69,37 @@ npm run preview
 
 ## Data Format
 
-CSV files should follow this format:
+CSV files from Wookiebot should follow this format:
 ```csv
 name,allycode,estimatedScore,lastActualScore,diff,diffPercent
 "Player Name",123456789,1500000,1450000,-50000,-3.33
 ```
+
+### Wookiebot Command Examples
+```
+/raid guild
+/raid guild effort:high
+```
+
+**Parameters:**
+- `effort`: Analysis effort level - `low`, `medium` (default), `high`
+
+## Troubleshooting
+
+### Site Not Loading
+- Check that GitHub Pages is enabled in your repository settings
+- Verify that GitHub Actions completed successfully (check the "Actions" tab)
+- Wait 2-3 minutes after upload for the build to complete
+
+### No Data Showing
+- Ensure CSV files are uploaded to the `/data` folder (not the root)
+- Check that CSV files follow the Wookiebot format
+- Verify that the CSV files contain actual data (not empty)
+
+### Build Failures
+- Check the "Actions" tab in your GitHub repository for error details
+- Ensure CSV files are valid and not corrupted
+- Try re-uploading the CSV files
 
 ## Technology Stack
 
