@@ -13,25 +13,28 @@ import GitHubLink from '../../components/GitHubLink.astro';
 
   ## Quick Setup
 
-  ### 1. Use This Template
-  1. Click the **"Use this template"** button at the top of this repository
-  2. Choose **"Create a new repository"**
+  ### 1. Fork This Repository
+  1. Go to [https://github.com/bataillon-swgoh/swgoh-raid-analysis](https://github.com/bataillon-swgoh/swgoh-raid-analysis)
+  2. Click the **"Fork"** button in the top right to create your own copy of the repository
   3. Give your repository a name (e.g., `my-guild-raids`, `guild-name-analysis`)
   4. Make sure it's set to **Public** (required for GitHub Pages)
-  5. Click **"Create repository from template"**
+  5. Click **"Create fork"**
+
+  #### Keeping Your Fork Up to Date
+  To get new features and bugfixes, you should regularly update your fork from the original repository:
+
+  1. Go to your forked repository on GitHub
+  2. Click the **"Sync fork"** button (usually above the file list or in the "Contribute" dropdown)
+  3. Confirm to update your fork with the latest changes from the original repository
 
   ### 2. Enable GitHub Pages
-  1. Go to your forked repository on GitHub
+  1. Go to your new repository on GitHub
   2. Navigate to **Settings** → **Pages** (in the left sidebar)
   3. Under **Source**, select **"GitHub Actions"**
-  4. The workflow will be automatically detected
+  4. **Important:** After forking, GitHub Actions workflows are disabled by default. Go to the **Actions** tab and click **"I understand my workflows, go ahead and enable them"** to activate the workflows for your fork.
+  5. The workflow will be automatically detected
 
-  ### 3. Clean Up Sample Data
-  1. In your forked repository, navigate to the `/data` folder
-  2. Delete all existing CSV files (these are sample data)
-  3. The folder should be empty after this step
-
-  ### 4. Generate Your Guild Data
+  ### 3. Add Your Guild Data
   1. In Star Wars: Galaxy of Heroes, use the Wookiebot command:
      ```
      /raid guild
@@ -39,34 +42,20 @@ import GitHubLink from '../../components/GitHubLink.astro';
      Add your desired parameters (effort level, etc.)
   2. Download the generated CSV file from Wookiebot
 
-  ### 5. Upload Your Data
+  ### 4. Upload Your Data
   1. In your GitHub repository, navigate to the `/data` folder
   2. Click **"Add file"** → **"Upload files"**
   3. Upload your downloaded CSV file(s)
   4. Commit the changes with a message like "Add raid data"
 
-  ### 6. Automatic Deployment
+  ### 5. Automatic Deployment
   - GitHub Actions will automatically build and deploy your site
-  - Your analysis will be available at: `https://YOUR_USERNAME.github.io/REPOSITORY_NAME/`
+  - Your analysis will be available at: `https://YOUR_USERNAME.github.io/YOUR_REPOSITORY_NAME/`
   - The build process takes 2-3 minutes
 
-  ### 7. Adding More Data
-  - Repeat steps 4-5 whenever you want to add new raid data
+  ### 6. Adding More Data
+  - Repeat steps 3-4 whenever you want to add new raid data
   - The site automatically updates with each new CSV file upload
-
-  ### 8. Updating Your Fork (Getting New Features)
-  When the original repository gets updates with new features or bug fixes:
-
-  1. Go to your forked repository on GitHub
-  2. Click the **"Sync fork"** button (if available) or:
-  3. **Manual sync via GitHub web interface**:
-     - Click **"Compare"** → switch the comparison to see updates from original
-     - Create a pull request from the original repository to your fork
-     - Merge the pull request to get the updates
-  4. **Alternative - Delete and re-fork**:
-     - If you haven't made custom changes, simply delete your fork
-     - Fork the repository again to get the latest version
-     - Re-upload your CSV data
 </Card>
 
 <Card title="Wookiebot Commands" icon="🤖">

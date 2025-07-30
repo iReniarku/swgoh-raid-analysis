@@ -17,18 +17,30 @@ A web application for analyzing guild raid data from Star Wars: Galaxy of Heroes
 
 ## Getting Started
 
-### 1. Use This Template
-1. Click the **"Use this template"** button at the top of this repository
-2. Choose **"Create a new repository"**
+
+### 1. Fork This Repository
+1. Go to [https://github.com/bataillon-swgoh/swgoh-raid-analysis](https://github.com/bataillon-swgoh/swgoh-raid-analysis)
+2. Click the **"Fork"** button in the top right to create your own copy of the repository
 3. Give your repository a name (e.g., `my-guild-raids`, `guild-name-analysis`)
 4. Make sure it's set to **Public** (required for GitHub Pages)
-5. Click **"Create repository from template"**
+5. Click **"Create fork"**
 
-### 2. Enable GitHub Pages
+#### Keeping Your Fork Up to Date
+To get new features and bugfixes, you should regularly update your fork from the original repository:
+
+**Recommended:**
+1. Go to your forked repository on GitHub
+2. Click the **"Sync fork"** button (usually above the file list or in the "Contribute" dropdown)
+3. Confirm to update your fork with the latest changes from the original repository
+
+
+
+### 2. Enable GitHub Pages & Actions
 1. Go to your new repository on GitHub
 2. Navigate to **Settings** → **Pages** (in the left sidebar)
 3. Under **Source**, select **"GitHub Actions"**
-4. The workflow will be automatically detected
+4. **Important:** After forking, GitHub Actions workflows are disabled by default. Go to the **Actions** tab and click **"I understand my workflows, go ahead and enable them"** to activate the workflows for your fork.
+5. The workflow will be automatically detected
 
 ### 3. Add Your Guild Data
 1. In Star Wars: Galaxy of Heroes, use the Wookiebot command:
