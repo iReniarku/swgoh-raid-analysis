@@ -1,5 +1,10 @@
+#!/usr/bin/env node
+
+
 import fs from 'fs';
 import path from 'path';
+
+console.log('[convert-csv-to-collections] Script started');
 
 function parseCSVLine(line) {
   const result = [];
@@ -117,3 +122,4 @@ function convertCSVsToCollections() {
 
 // Run the conversion
 convertCSVsToCollections();
+console.log('[convert-csv-to-collections] Script finished');

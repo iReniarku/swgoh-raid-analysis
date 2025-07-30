@@ -25,6 +25,15 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      watch: {
+        // explizit den data-Ordner nicht ignorieren (Vite default ignoriert node_modules, nicht data)
+        ignored: [
+          // Ignoriere nichts im data-Ordner
+          '!**/data/**'
+        ]
+      }
+    }
   }
 });

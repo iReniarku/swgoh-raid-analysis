@@ -186,7 +186,8 @@ function updateTable() {
 
 function formatNumber(num) {
   if (num === 0) return '-';
-  return new Intl.NumberFormat('de-DE').format(Math.round(num));
+  // Verwende die Sprache des Browsers für die Formatierung
+  return new Intl.NumberFormat(navigator.language).format(Math.round(num));
 }
 
 export function sortTable(column) {

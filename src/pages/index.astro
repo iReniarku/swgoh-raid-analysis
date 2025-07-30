@@ -238,10 +238,6 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
       secondaryAlpha: (alpha) => `rgba(${getCSSVariable('--color-secondary-rgb')}, ${alpha})`
     };
 
-    console.log('Script loaded, allRaidData:', allRaidData);
-    console.log('Script loaded, playerStats:', allPlayerStats);
-    console.log('Script loaded, baseUrl:', baseUrl);
-
     function waitForChartJS(callback) {
       if (typeof Chart !== 'undefined') {
         callback();
@@ -350,7 +346,8 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
 
     function formatNumber(num) {
       if (num === 0) return '-';
-      return new Intl.NumberFormat('de-DE').format(Math.round(num));
+      // Verwende die Sprache des Browsers für die Formatierung
+      return new Intl.NumberFormat(navigator.language).format(Math.round(num));
     }
 
     function getPercentageClass(percentage) {
@@ -457,7 +454,7 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
               ticks: { 
                 color: themeColors.secondary,
                 callback: function(value) {
-                  return new Intl.NumberFormat('de-DE').format(value);
+                  return new Intl.NumberFormat(navigator.language).format(value);
                 }
               },
               grid: { color: themeColors.secondaryAlpha(0.1) },
@@ -516,7 +513,7 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
                   return context[0].label;
                 },
                 label: function(context) {
-                  return `${context.dataset.label}: ${new Intl.NumberFormat('de-DE').format(context.parsed.y)} points`;
+                  return `${context.dataset.label}: ${new Intl.NumberFormat(navigator.language).format(context.parsed.y)} points`;
                 }
               }
             }
@@ -530,7 +527,7 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
               ticks: { 
                 color: '#e0e0e0',
                 callback: function(value) {
-                  return new Intl.NumberFormat('de-DE').format(value);
+                  return new Intl.NumberFormat(navigator.language).format(value);
                 }
               },
               grid: { color: 'rgba(255, 255, 255, 0.1)' },
@@ -687,7 +684,7 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
       for (let player of allPlayersData) {
         html += `<tr>`;
         html += `<td class="table-cell-sticky">${player.name}</td>`;
-        html += `<td class="table-cell-center">${Math.round(player.avgEstimate).toLocaleString()}</td>`;
+        html += `<td class="table-cell-center">${new Intl.NumberFormat(navigator.language).format(Math.round(player.avgEstimate))}</td>`;
         
         // Add individual raid scores for last 5 raids
         for (let raidDate of last5RaidDates) {
@@ -710,7 +707,7 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
             const estimatedScore = raidEntry?.estimatedScore || 0;
             const raidEfficiency = estimatedScore > 0 ? ((score / estimatedScore) * 100) : 0;
             
-            html += `<td class="table-cell-center ${percentageClass}">${score.toLocaleString()} (${raidEfficiency.toFixed(0)}%)</td>`;
+            html += `<td class="table-cell-center ${percentageClass}">${new Intl.NumberFormat(navigator.language).format(score)} (${raidEfficiency.toFixed(0)}%)</td>`;
           }
         }
         
@@ -748,12 +745,12 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
       
       // Add footer row with totals
       html += `<tr class="table-footer">`;
-      html += `<td class="table-cell-sticky">📊 GESAMT (${allPlayersData.length} Spieler)</td>`;
-      html += `<td>${Math.round(totalAvgEstimate).toLocaleString()}</td>`;
+      html += `<td class="table-cell-sticky">📊 TOTAL (${allPlayersData.length} players)</td>`;
+      html += `<td>${new Intl.NumberFormat(navigator.language).format(Math.round(totalAvgEstimate))}</td>`;
       
       // Add total scores for each raid
       for (let raidDate of last5RaidDates) {
-        html += `<td>${raidTotals[raidDate].toLocaleString()}</td>`;
+        html += `<td>${new Intl.NumberFormat(navigator.language).format(raidTotals[raidDate])}</td>`;
       }
       
       // Add average Max/Est percentage
@@ -779,7 +776,7 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
         const th = document.createElement('th');
         th.setAttribute('data-raid-date', raidDate);
         th.className = 'table-header px-2 sm:px-3 py-2 sm:py-3 text-center min-w-[100px]';
-        th.innerHTML = `${raidDate}<br><small class="text-gray-400">(Ø ${Math.round(raidAverages[raidDate]).toLocaleString()})</small>`;
+        th.innerHTML = `${raidDate}<br><small class="text-gray-400">(Ø ${new Intl.NumberFormat(navigator.language).format(Math.round(raidAverages[raidDate]))})</small>`;
         tableHeader.appendChild(th);
       }
       
