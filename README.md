@@ -30,8 +30,12 @@ To get new features and bugfixes, you should regularly update your fork from the
 
 **Recommended:**
 1. Go to your forked repository on GitHub
+
+
 2. Click the **"Sync fork"** button (usually above the file list or in the "Contribute" dropdown)
-3. Confirm to update your fork with the latest changes from the original repository
+3. In the dialog, click the **"Update branch"** button to sync your fork with the latest changes from the original repository.
+
+**Warning:** Never click **"Discard Commits"** when syncing your fork! This will permanently delete your own raid results and data. Always use the **"Update branch"** option to keep your changes.
 
 
 
