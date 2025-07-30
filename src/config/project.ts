@@ -16,7 +16,7 @@ export const PROJECT_CONFIG = {
   baseUrl: import.meta.env.BASE_URL || (import.meta.env.PROD ? '/swgoh-raid-analysis/' : '/'),
   
   // Project title
-  title: `${import.meta.env.PROJECT_NAME || import.meta.env.GITHUB_REPOSITORY_NAME || 'SWGoH'} Raid Analysis`,
+  title: `SWGoH Raid Analysis`,
   
   // Project description
   description: 'Advanced Guild Raid Analytics for Star Wars: Galaxy of Heroes',
