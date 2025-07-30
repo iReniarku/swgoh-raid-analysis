@@ -1,4 +1,4 @@
-// Main application logic for Order 66 Raid Analysis
+// Main application logic for SWGoH Raid Analysis
 
 let raidData = [];
 let playerStats = new Map();
@@ -204,7 +204,7 @@ export function exportData() {
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
-  link.download = `order66_auswertung_${new Date().toISOString().split('T')[0]}.csv`;
+  link.download = `swgoh-raid-analysis_export_${new Date().toISOString().split('T')[0]}.csv`;
   link.click();
 }
 

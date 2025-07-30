@@ -4,12 +4,12 @@ import mdx from '@astrojs/mdx';
 
 import tailwindcss from '@tailwindcss/vite';
 
-// Automatically get repository name from GitHub context or use 'order66' as fallback
+// Automatically get repository name from GitHub context or use 'swgoh-raid-analysis' as fallback
 const getBasePath = () => {
   if (process.env.NODE_ENV !== 'production') return '/';
   
   // Try to get repository name from GitHub context
-  const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'order66';
+  const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'swgoh-raid-analysis';
   return `/${repoName}`;
 };
 

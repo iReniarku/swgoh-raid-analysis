@@ -1,8 +1,10 @@
-# Order 66 Raid Analysis - SWGoH
+# SWGoH Raid Analysis Tool
 
-A web application for analyzing Order 66 raid data from Star Wars: Galaxy of Heroes.
+> 📋 **This is a template repository** - Click "Use this template" to create your own guild analysis
 
-🚀 **Live Demo**: [https://dennisbecker.github.io/order66/](https://dennisbecker.github.io/order66/)
+A web application for analyzing guild raid data from Star Wars: Galaxy of Heroes using Wookiebot.
+
+🚀 **Live Demo**: [https://dennisbecker.github.io/swgoh-raid-analysis/](https://dennisbecker.github.io/swgoh-raid-analysis/) (Example with sample guild data)
 
 ## Features
 
@@ -18,7 +20,7 @@ A web application for analyzing Order 66 raid data from Star Wars: Galaxy of Her
 ### 1. Use This Template
 1. Click the **"Use this template"** button at the top of this repository
 2. Choose **"Create a new repository"**
-3. Give your repository a name (e.g., `my-guild-raids`, `order66-analysis`)
+3. Give your repository a name (e.g., `my-guild-raids`, `guild-name-analysis`)
 4. Make sure it's set to **Public** (required for GitHub Pages)
 5. Click **"Create repository from template"**
 

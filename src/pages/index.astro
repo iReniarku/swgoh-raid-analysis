@@ -155,38 +155,70 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
 ---
 
 <Layout title={`${PROJECT_CONFIG.title} - SWGoH`}>
-  <div class="text-center mb-4">
-    <div class="inline-block bg-cyan-500/20 border border-cyan-500/30 rounded-lg px-4 py-2">
-      <span class="text-cyan-400 font-semibold">📊 Analysis based on last {last5RaidsCount} raids</span>
+  {totalRaids > 0 ? (
+    <>
+      <div class="text-center mb-4">
+        <div class="inline-block bg-cyan-500/20 border border-cyan-500/30 rounded-lg px-4 py-2">
+          <span class="text-cyan-400 font-semibold">📊 Analysis based on last {last5RaidsCount} raids</span>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-6 sm:mb-8 mobile-stat-grid">
+        <StatCard title="Last 5 Raids" value={last5RaidsCount.toString()} id="last5Raids" />
+        <StatCard title="Active Players" value={activePlayers.toString()} id="activePlayers" />
+        <StatCard title="Avg Participation" value={`${avgParticipation}%`} id="avgParticipation" />
+        <StatCard title="Avg Efficiency" value={`${avgEfficiency}%`} id="avgEfficiency" />
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 sm:gap-10 mb-6 sm:mb-8">
+        <ChartContainer 
+          title="📊 Total Raid Points Over Time" 
+          canvasId="raidTotalChart"
+        />
+        
+        <ChartContainer 
+          title="🏆 Performance Points Over Time" 
+          canvasId="rankingChart"
+          description="Player scores per raid • Higher values = better performance"
+        />
+      </div>
+
+      <PlayerTable />
+      <RaidTable />
+    </>
+  ) : (
+    <div class="text-center py-12">
+      <div class="text-6xl mb-6">🚀</div>
+      <h2 class="text-2xl font-bold text-cyan-400 mb-4">No Raid Data Found</h2>
+      <div class="text-gray-300 mb-8 space-y-4">
+        <p class="text-lg">To get started, you need to export your raid data from Wookiebot.</p>
+        
+        <div class="bg-gray-800/50 rounded-lg p-6 max-w-2xl mx-auto">
+          <h3 class="text-cyan-400 font-semibold mb-3">📋 How to get your data:</h3>
+          <ol class="text-left space-y-2 text-sm">
+            <li><strong>1.</strong> Go to your guild's Discord server</li>
+            <li><strong>2.</strong> Use the command: <code class="bg-gray-700 px-2 py-1 rounded text-cyan-300">/raid guild</code></li>
+            <li><strong>3.</strong> Download the CSV file from Wookiebot</li>
+            <li><strong>4.</strong> In your GitHub repository, go to the <code class="bg-gray-700 px-2 py-1 rounded text-cyan-300">data/</code> folder</li>
+            <li><strong>5.</strong> Click <strong>"Add file" → "Upload files"</strong></li>
+            <li><strong>6.</strong> Upload your CSV file and commit the changes</li>
+            <li><strong>7.</strong> GitHub Actions will automatically build and deploy your updated site</li>
+          </ol>
+        </div>
+        
+        <div class="mt-6">
+          <a href={`${baseUrl}help/`} class="btn-primary inline-flex items-center gap-2">
+            📚 View Detailed Help Guide
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-  
-  <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-6 sm:mb-8 mobile-stat-grid">
-    <StatCard title="Last 5 Raids" value={last5RaidsCount.toString()} id="last5Raids" />
-    <StatCard title="Active Players" value={activePlayers.toString()} id="activePlayers" />
-    <StatCard title="Avg Participation" value={`${avgParticipation}%`} id="avgParticipation" />
-    <StatCard title="Avg Efficiency" value={`${avgEfficiency}%`} id="avgEfficiency" />
-  </div>
+  )}
 
-  <div class="grid grid-cols-1 gap-6 sm:gap-10 mb-6 sm:mb-8">
-    <ChartContainer 
-      title="📊 Total Raid Points Over Time" 
-      canvasId="raidTotalChart"
-    />
-    
-    <ChartContainer 
-      title="🏆 Performance Points Over Time" 
-      canvasId="rankingChart"
-      description="Player scores per raid • Higher values = better performance"
-    />
-  </div>
-
-  <PlayerTable />
-  <RaidTable />
-
-  <script define:vars={{ allRaidData, playerStatsArray, baseUrl }}>
-    let raidData = allRaidData;
-    let allPlayerStats = playerStatsArray;
+  {totalRaids > 0 && (
+    <script define:vars={{ allRaidData, playerStatsArray, baseUrl }}>
+      let raidData = allRaidData;
+      let allPlayerStats = playerStatsArray;
     let filteredData = [...allPlayerStats];
     let isInitialized = false;
 
@@ -227,12 +259,6 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
         
         console.log('initializeApp called, raidData.length:', raidData.length);
         
-        if (raidData.length === 0) {
-          console.log('No raid data found, showing no-data message');
-          showNoDataMessage();
-          return;
-        }
-
         console.log('Creating charts and applying initial filters...');
         
         // Wait for Chart.js before updating UI
@@ -344,40 +370,6 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
     function showError(message) {
       const errorDiv = document.getElementById('error');
       errorDiv.textContent = message;
-      errorDiv.classList.remove('hidden');
-    }
-
-    function showNoDataMessage() {
-      const errorDiv = document.getElementById('error');
-      
-      errorDiv.innerHTML = `
-        <div class="text-center py-12">
-          <div class="text-6xl mb-6">🚀</div>
-          <h2 class="text-2xl font-bold text-cyan-400 mb-4">No Raid Data Found</h2>
-          <div class="text-gray-300 mb-8 space-y-4">
-            <p class="text-lg">To get started, you need to export your raid data from Wookiebot.</p>
-            
-            <div class="bg-gray-800/50 rounded-lg p-6 max-w-2xl mx-auto">
-              <h3 class="text-cyan-400 font-semibold mb-3">📋 How to get your data:</h3>
-              <ol class="text-left space-y-2 text-sm">
-                <li><strong>1.</strong> Go to your guild's Discord server</li>
-                <li><strong>2.</strong> Use the command: <code class="bg-gray-700 px-2 py-1 rounded text-cyan-300">/raid guild</code></li>
-                <li><strong>3.</strong> Wookiebot will provide a CSV file download</li>
-                <li><strong>4.</strong> Save the file as <code class="bg-gray-700 px-2 py-1 rounded text-cyan-300">yyyy-mm-dd.csv</code> (e.g., <code class="bg-gray-700 px-2 py-1 rounded text-cyan-300">2025-07-23.csv</code>)</li>
-                <li><strong>5.</strong> Place the file in the <code class="bg-gray-700 px-2 py-1 rounded text-cyan-300">data/</code> directory</li>
-                <li><strong>6.</strong> Run <code class="bg-gray-700 px-2 py-1 rounded text-cyan-300">npm run build</code> to process the data</li>
-              </ol>
-            </div>
-            
-            <div class="mt-6">
-              <a href="\${baseUrl}help/" class="btn-primary inline-flex items-center gap-2">
-                📚 View Detailed Help Guide
-              </a>
-            </div>
-          </div>
-        </div>
-      `;
-      
       errorDiv.classList.remove('hidden');
     }
 
@@ -802,5 +794,6 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
     window.sortTable = sortTable;
     window.updateRankingChart = updateRankingChart;
     window.updateRaidTable = updateRaidTable;
-  </script>
+    </script>
+  )}
 </Layout>
