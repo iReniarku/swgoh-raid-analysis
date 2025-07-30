@@ -6,8 +6,8 @@ function parseCSVLine(line) {
   let current = '';
   let inQuotes = false;
   
-  for (let i = 0; i < line.length; i++) {
-    const char = line[i];
+  for (const element of line) {
+    const char = element;
     if (char === '"') {
       inQuotes = !inQuotes;
     } else if (char === ',' && !inQuotes) {
