@@ -344,9 +344,8 @@ const baseUrl = PROJECT_CONFIG.baseUrl;
       });
     }
 
-    function formatNumber(num) {
+function formatNumber(num) {
       if (num === 0) return '-';
-      // Verwende die Sprache des Browsers für die Formatierung
       return new Intl.NumberFormat(navigator.language).format(Math.round(num));
     }
 
