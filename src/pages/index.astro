@@ -6,6 +6,7 @@ import ChartContainer from '../components/ChartContainer.astro';
 import PlayerTable from '../components/PlayerTable.astro';
 import RaidTable from '../components/RaidTable.astro';
 import { PROJECT_CONFIG } from '../config/project.ts';
+import type { RaidData, PlayerRaidEntry, PlayerStats } from '../types/raid.ts';
 import '../styles/global.css';
 
 const allRaids = await getCollection('raids');
@@ -22,7 +23,7 @@ const allRaidData = sortedRaids.map(raid => ({
 }));
 
 // Server-side calculations
-function calculatePlayerStats(raidData) {
+function calculatePlayerStats(raidData: RaidData[]): PlayerStats[] {
   const playerStats = new Map();
   
   // Get the last 5 raids for more recent analysis
@@ -36,8 +37,8 @@ function calculatePlayerStats(raidData) {
   });
 
   allPlayers.forEach(allycode => {
-    const playerRaids = [];
-    const playerLast5Raids = [];
+    const playerRaids: PlayerRaidEntry[] = [];
+    const playerLast5Raids: PlayerRaidEntry[] = [];
     let name = '';
     
     // Process all raids for historical data

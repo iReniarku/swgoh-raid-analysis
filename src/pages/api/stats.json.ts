@@ -7,13 +7,16 @@ export const GET: APIRoute = async () => {
     
     const stats = {
       totalRaids: allRaids.length,
-      dateRange: {
+      dateRange: allRaids.length > 0 ? {
         earliest: allRaids.reduce((earliest, raid) => 
           new Date(raid.data.date) < new Date(earliest.data.date) ? raid : earliest
-        ).data.date,
+        , allRaids[0]).data.date,
         latest: allRaids.reduce((latest, raid) => 
           new Date(raid.data.date) > new Date(latest.data.date) ? raid : latest
-        ).data.date
+        , allRaids[0]).data.date
+      } : {
+        earliest: null,
+        latest: null
       },
       totalPlayers: new Set(
         allRaids.flatMap(raid => 
@@ -30,6 +33,7 @@ export const GET: APIRoute = async () => {
       },
     });
   } catch (error) {
+    console.error('Failed to fetch stats:', error);
     return new Response(JSON.stringify({ error: 'Failed to fetch stats' }), {
       status: 500,
       headers: {

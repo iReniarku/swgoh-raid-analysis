@@ -224,11 +224,7 @@ function createCharts() {
 // Chart creation functions and other utilities...
 // (For brevity, I'll keep the main chart functions in the main file for now)
 
-export function updateRaidTable() {
-  const sortBy = document.getElementById('raidTableSort').value;
-  const filterText = document.getElementById('raidTableFilter').value.toLowerCase();
-  const raidTableBody = document.getElementById('raidTableBody');
-  
+function preparePlayersData() {
   const allPlayersData = [];
   const allRaidDates = raidData.map(raid => raid.date).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
   
@@ -250,6 +246,10 @@ export function updateRaidTable() {
     allPlayersData.push(playerData);
   }
   
+  return { allPlayersData, allRaidDates };
+}
+
+function filterAndSortPlayers(allPlayersData, filterText, sortBy) {
   let filteredDataLocal = allPlayersData;
   if (filterText) {
     filteredDataLocal = allPlayersData.filter(p => p.name.toLowerCase().includes(filterText));
@@ -270,8 +270,10 @@ export function updateRaidTable() {
     }
   });
   
-  let html = '';
-  
+  return filteredDataLocal;
+}
+
+function calculateRaidAverages(allPlayersData, allRaidDates) {
   const raidAverages = {};
   for (let raidDate of allRaidDates) {
     const raidScores = allPlayersData
@@ -280,6 +282,11 @@ export function updateRaidTable() {
     raidAverages[raidDate] = raidScores.length > 0 ? 
       raidScores.reduce((sum, score) => sum + score, 0) / raidScores.length : 0;
   }
+  return raidAverages;
+}
+
+function generateTableHTML(filteredDataLocal, allRaidDates, raidAverages) {
+  let html = '';
   
   for (let player of filteredDataLocal) {
     html += `<tr class="table-row">`;
@@ -304,8 +311,10 @@ export function updateRaidTable() {
     html += `</tr>`;
   }
   
-  raidTableBody.innerHTML = html;
-  
+  return html;
+}
+
+function updateTableHeaders(allRaidDates, raidAverages) {
   const tableHeader = document.querySelector('#raidTable thead tr');
   const existingRaidHeaders = tableHeader.querySelectorAll('th[data-raid-date]');
   
@@ -318,6 +327,21 @@ export function updateRaidTable() {
       tableHeader.appendChild(th);
     }
   }
+}
+
+export function updateRaidTable() {
+  const sortBy = document.getElementById('raidTableSort').value;
+  const filterText = document.getElementById('raidTableFilter').value.toLowerCase();
+  const raidTableBody = document.getElementById('raidTableBody');
+  
+  const { allPlayersData, allRaidDates } = preparePlayersData();
+  const filteredDataLocal = filterAndSortPlayers(allPlayersData, filterText, sortBy);
+  const raidAverages = calculateRaidAverages(allPlayersData, allRaidDates);
+  
+  const html = generateTableHTML(filteredDataLocal, allRaidDates, raidAverages);
+  raidTableBody.innerHTML = html;
+  
+  updateTableHeaders(allRaidDates, raidAverages);
 }
 
 // Make functions globally available
